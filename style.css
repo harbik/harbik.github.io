@@ -1,0 +1,17 @@
+
+:root {
+	--base-color: teal;
+}
+body { 
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	color: var(--base-color);
+}
+
+main {
+	max-width: 40rem;
+	margin: 5rem auto;
+}
+
+a, a:visited {
+	color: var(--base-color);
+}
