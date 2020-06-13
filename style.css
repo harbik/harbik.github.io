@@ -15,3 +15,7 @@ main {
 a, a:visited {
 	color: var(--base-color);
 }
+
+a:hover {
+	color: darkgoldenrod;
+}
