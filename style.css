@@ -19,3 +19,12 @@ a, a:visited {
 a:hover {
 	color: darkgoldenrod;
 }
+
+footer {
+	display:flex; 
+	flex-direction:column; 
+	align-items: center;  
+	max-width: 35rem; 
+	margin: 5rem auto; 
+	font-size: 0.95rem;	
+}
