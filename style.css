@@ -9,11 +9,13 @@ body {
 
 main {
 	max-width: 40rem;
-	margin: 5rem auto;
+	margin: 3rem auto;
 }
 
 a, a:visited {
 	color: var(--base-color);
+	font-weight: 700;
+	text-decoration: none;
 }
 
 a:hover {
@@ -25,6 +27,6 @@ footer {
 	flex-direction:column; 
 	align-items: center;  
 	max-width: 35rem; 
-	margin: 5rem auto; 
-	font-size: 0.95rem;	
+	margin: 0 auto; 
+	font-style: italic;
 }
