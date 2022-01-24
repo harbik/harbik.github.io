@@ -1,10 +1,9 @@
 const N = 319; // number of colors
 var n_tests;
-var seed = 8;
-var score = [[],[],[],[],[]];
 var spans; // distance between color samples in the various rounds
 var play; // play section node
-var rand = mulberry32(seed);
+var results;
+var rand;// = mulberry32(seed);
 
 function mulberry32(a) {
     return function() {
@@ -20,47 +19,45 @@ function draw_circle(i, pos, correct){
     img.src = `../images/p${i%N}.png`;
     img.className = "color-circle";
     img.dataset.correct = correct?1:0;
+    img.dataset.time = Date.now();
     let ball = document.getElementById(pos);
     ball.removeChild(ball.firstChild);
     ball.insertBefore(img, ball.firstChild);
 }
 
 function draw_circles(/*play*/){
-    let r = Math.floor(rand()*3); // deviator
+    let positions = JSON.parse(play.dataset.positions);
+    let pos_outlier = positions.pop();
+    play.dataset.positions = JSON.stringify(positions);
     let h = +play.dataset.hue;
     let level = +play.dataset.level;
     let de = spans[level];
-    draw_circle(h + (r==0) * de, "left", r==0);
-    draw_circle(h + (r==1) * de, "middle", r==1);
-    draw_circle(h + (r==2) * de, "right", r==2);
+    draw_circle(h + (pos_outlier==0) * de, "left", pos_outlier==0);
+    draw_circle(h + (pos_outlier==1) * de, "middle", pos_outlier==1);
+    draw_circle(h + (pos_outlier==2) * de, "right", pos_outlier==2);
 }
 
 function play_next() {
-    //let play = document.getElementById(`play`);
-   // let played = +play.dataset.test;
-   // console.log("hues", play.dataset.hues.length);
     let hues = JSON.parse(play.dataset.hues);
     if (hues.length>0) {
         play.dataset.hue = hues.pop();
         play.dataset.hues = JSON.stringify(hues);
         play.dataset.test = +play.dataset.test + 1;
-       // let level = +play.dataset.level;
         document.getElementById("title").textContent = `${+play.dataset.level+1}.${n_tests-hues.length}`;
-      //  play.dataset.hue = Math.floor(rand() * 319);
-        draw_circles(/*play*/);
+        draw_circles();
     } else if (+play.dataset.level < spans.length - 1) {
-        show_interim(/*play*/);
+        show_interim();
     } else {
-        show_report(/*play, score*/);
+        show_report();
     }
 }
 
-function show_interim(/*play*/){
+function show_interim(){
     play.style.display = "none";
     let interim = document.getElementById("interim");
     let level = +play.dataset.level;
     let n_good = 0;
-    for ( const {hue,result} of score[level]) {
+    for ( const {hue,result} of results.score[level]) {
         if (+result === 1) n_good += 1;
     }
     document.querySelector("#interim").innerHTML = `
@@ -73,30 +70,32 @@ function show_interim(/*play*/){
     play.dataset.test = 0;
 }
 
-function show_report(/*play*/){
+function show_report(){
     play.style.display = "none";
+    results.duration = Math.floor((Date.now()-results.date)/1000);
     let report = document.getElementById("report");
     let n;
-    for (i=0; i<score.length; i++) {
-        for (j=0, n=0; j<score[i].length; j++) {
-            ({hue, result} = score[i][j]);
+    for (i=0; i<results.score.length; i++) {
+        for (j=0, n=0; j<results.score[i].length; j++) {
+            ({hue, result} = results.score[i][j]);
             if (+result === 1) n += 1;
         }
         let h = document.createElement("p");
         h.style.margin = 0;
-        h.textContent = `Round ${i}:  ${n}/${n_tests}`;
+        h.textContent = `Round ${i+1}:  ${n}/${n_tests}`;
         report.appendChild(h)
     }
 
     report.style.display = "flex";
+    console.log(results);
 }
 
 function init_splash(){
     document.getElementById("splash").addEventListener('click', e => {
         document.getElementById("splash").style.display = "none";
-        //document.getElementById("play").style.display = "flex";
         play.style.display = "flex";
         init_hues();
+        init_positions();
         play_next();
     });
 }
@@ -106,12 +105,13 @@ function init_interim() {
     interim.addEventListener("click", e => {
         interim.style.display = "none";
         play.style.display = "flex";
-        //document.getElementById("play").style.display = "flex";
         init_hues();
+        init_positions();
         play_next();
     })
 }
 
+// make this a generator?
 function init_hues() {
     let ordered_hues = [];
     for (i=0;i<n_tests;i++){
@@ -125,33 +125,27 @@ function init_hues() {
     play.dataset.hues = JSON.stringify(hues);
 }
 
-/*
-function init_play_select(play, position){
-        let item = play.querySelector(position);
-        item.addEventListener("click", e => {
-            let img = item.querySelector("img");
-            score[+play.dataset.level].push({hue:play.dataset.hue, result: img.dataset.correct});
-            play_next();
-        })
+// make this a generator?
+function init_positions() {
+    let ordered_positions = [];
+    let seed = Date.now()%3;
+    for (i=0;i<n_tests; i++) {
+        ordered_positions.push((seed+i)%3);
+    }
+    let positions = [];
+    for (i=0; i<n_tests;i++){
+        let index = Math.floor(rand()*ordered_positions.length);
+        positions.push(ordered_positions.splice(index, 1)[0])
+    }
+    play.dataset.positions = JSON.stringify(positions);
 }
-
-function init_plays(){
-    let parameters = document.querySelector("main").dataset;
-    spans = JSON.parse(parameters.levelsSpan);
-    n_tests = +parameters.tests;
-    let p = document.getElementById("play");
-    init_play_select(p, "#left");
-    init_play_select(p, "#middle");
-    init_play_select(p, "#right");
-}
-*/
 
 function init_plays(){
     for (position of ["#left", "#middle", "#right"]) {
         let item = play.querySelector(position);
         item.addEventListener("click", e => {
             let img = item.querySelector("img");
-            score[+play.dataset.level].push({hue:play.dataset.hue, result: img.dataset.correct});
+            results.score[+play.dataset.level].push({hue:play.dataset.hue, result: img.dataset.correct, time: Date.now()-img.dataset.time});
             play_next();
         })
 
@@ -164,6 +158,12 @@ function init(){
     spans = JSON.parse(parameters.levelsSpan);
     n_tests = +parameters.tests;
     play = document.getElementById("play");
+    let date = Date.now();
+    seed = date % Math.pow(2,32);
+    rand = mulberry32(seed);
+    let score = [];
+    for (i=0; i<spans.length; i++) score.push([]);
+    results = {date, seed, score, duration: 0};
 
     // set up all the event handlers
     init_splash();
