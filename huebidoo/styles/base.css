@@ -19,11 +19,11 @@ section {
 }
 
 .fadein, .fadein img  {
-    -webkit-animation: fadeIn ease 2s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadeIn ease 2s; /* Firefox < 16 */
-        -ms-animation: fadeIn ease 2s; /* Internet Explorer */
-         -o-animation: fadeIn ease 2s; /* Opera < 12.1 */
-            animation: fadeIn ease 2s;
+    -webkit-animation: fadeIn ease 1s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadeIn ease 1s; /* Firefox < 16 */
+        -ms-animation: fadeIn ease 1s; /* Internet Explorer */
+         -o-animation: fadeIn ease 1s; /* Opera < 12.1 */
+            animation: fadeIn ease 1s;
 }
             
 @keyframes fadeIn { 0% { opacity:0; } 100% { opacity:1; } }

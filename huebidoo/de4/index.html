@@ -8,29 +8,28 @@
 
     <body>
         <main data-levels-span="[16,8,4,2,1]" data-tests="16">
-        <section id="splash" class="fadein" >
-            <img src="../images/splash.svg" style="width: 20rem;"/>
-        </section>
-        <section id="play" class="fadein" style="display:none;" data-level=0 data-test=0>
-            <div id="title" class="text"></div>
-            <div style="display:flex;"> 
-                <div id="left" style="display:flex;  flex-direction: column; justify-content: center; align-items: center;">
-                    <div class="text">A</div>
+            <section id="splash" class="fadein" >
+                <img src="../images/splash.svg" style="width: 20rem;"/>
+            </section>
+            <section id="play" class="fadein" style="display:none;" data-level=0 data-test=0>
+                <div id="title" class="text"></div>
+                <div style="display:flex;"> 
+                    <div id="left" style="display:flex;  flex-direction: column; justify-content: center; align-items: center;">
+                        <div class="text">A</div>
+                    </div>
+                    <div id="middle" style="display:flex;  flex-direction: column; justify-content: center; align-items: center;">
+                        <div class="text">B</div>
+                    </div>
+                    <div id="right" style="display:flex;  flex-direction: column; justify-content: center; align-items: center;"> 
+                        <div class="text">C</div>
+                    </div>
                 </div>
-                <div id="middle" style="display:flex;  flex-direction: column; justify-content: center; align-items: center;">
-                    <div class="text">B</div>
-                </div>
-                <div id="right" style="display:flex;  flex-direction: column; justify-content: center; align-items: center;"> 
-                    <div class="text">C</div>
-                </div>
-            </div>
-        </section>
-        <section id="interim" class="fadein" style="display:none;">
-        </section>
-        <section id="report" class="fadein" style="display:none;">
-            <h1>Thank You!</h1>
-        </section>
-    </main>
+            </section>
+            <section id="interim" class="fadein" style="display:none;"> </section>
+            <section id="report" class="fadein" style="display:none;">
+                <h1>Score Summary</h1>
+            </section>
+        </main>
     </body>
 
     <script>
