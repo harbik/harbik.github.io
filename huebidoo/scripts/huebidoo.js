@@ -2,7 +2,8 @@ const N = 319; // number of colors
 var n_tests;
 var seed = 8;
 var score = [[],[],[],[],[]];
-var spans;
+var spans; // distance between color samples in the various rounds
+var play; // play section node
 var rand = mulberry32(seed);
 
 function mulberry32(a) {
@@ -24,7 +25,7 @@ function draw_circle(i, pos, correct){
     ball.insertBefore(img, ball.firstChild);
 }
 
-function draw_circles(play){
+function draw_circles(/*play*/){
     let r = Math.floor(rand()*3); // deviator
     let h = +play.dataset.hue;
     let level = +play.dataset.level;
@@ -32,26 +33,29 @@ function draw_circles(play){
     draw_circle(h + (r==0) * de, "left", r==0);
     draw_circle(h + (r==1) * de, "middle", r==1);
     draw_circle(h + (r==2) * de, "right", r==2);
-    document.getElementById("title").textContent = `${level+1}.${play.dataset.test}`;
 }
-
 
 function play_next() {
-    let play = document.getElementById(`play`);
-    let played = +play.dataset.test;
-    if (played < n_tests) {
+    //let play = document.getElementById(`play`);
+   // let played = +play.dataset.test;
+   // console.log("hues", play.dataset.hues.length);
+    let hues = JSON.parse(play.dataset.hues);
+    if (hues.length>0) {
+        play.dataset.hue = hues.pop();
+        play.dataset.hues = JSON.stringify(hues);
         play.dataset.test = +play.dataset.test + 1;
-        play.dataset.hue = Math.floor(rand() * 319);
-        draw_circles(play);
+       // let level = +play.dataset.level;
+        document.getElementById("title").textContent = `${+play.dataset.level+1}.${n_tests-hues.length}`;
+      //  play.dataset.hue = Math.floor(rand() * 319);
+        draw_circles(/*play*/);
     } else if (+play.dataset.level < spans.length - 1) {
-        show_interim(play);
+        show_interim(/*play*/);
     } else {
-        show_report(play, score);
+        show_report(/*play, score*/);
     }
-
 }
 
-function show_interim(play){
+function show_interim(/*play*/){
     play.style.display = "none";
     let interim = document.getElementById("interim");
     let level = +play.dataset.level;
@@ -69,7 +73,7 @@ function show_interim(play){
     play.dataset.test = 0;
 }
 
-function show_report(play){
+function show_report(/*play*/){
     play.style.display = "none";
     let report = document.getElementById("report");
     let n;
@@ -87,27 +91,41 @@ function show_report(play){
     report.style.display = "flex";
 }
 
-
-
 function init_splash(){
     document.getElementById("splash").addEventListener('click', e => {
         document.getElementById("splash").style.display = "none";
-        document.getElementById("play").style.display = "flex";
+        //document.getElementById("play").style.display = "flex";
+        play.style.display = "flex";
+        init_hues();
         play_next();
     });
 }
-
-
 
 function init_interim() {
     let interim = document.getElementById("interim");
     interim.addEventListener("click", e => {
         interim.style.display = "none";
-        document.getElementById("play").style.display = "flex";
+        play.style.display = "flex";
+        //document.getElementById("play").style.display = "flex";
+        init_hues();
         play_next();
     })
 }
 
+function init_hues() {
+    let ordered_hues = [];
+    for (i=0;i<n_tests;i++){
+        ordered_hues.push(Math.floor((i+rand()) * N/n_tests));
+    }
+    let hues = [];
+    for (i=0; i<n_tests;i++){
+        let index = Math.floor(rand()*ordered_hues.length);
+        hues.push(ordered_hues.splice(index, 1)[0])
+    }
+    play.dataset.hues = JSON.stringify(hues);
+}
+
+/*
 function init_play_select(play, position){
         let item = play.querySelector(position);
         item.addEventListener("click", e => {
@@ -126,4 +144,29 @@ function init_plays(){
     init_play_select(p, "#middle");
     init_play_select(p, "#right");
 }
+*/
 
+function init_plays(){
+    for (position of ["#left", "#middle", "#right"]) {
+        let item = play.querySelector(position);
+        item.addEventListener("click", e => {
+            let img = item.querySelector("img");
+            score[+play.dataset.level].push({hue:play.dataset.hue, result: img.dataset.correct});
+            play_next();
+        })
+
+    }
+}
+
+function init(){
+    // init globals
+    let parameters = document.querySelector("main").dataset;
+    spans = JSON.parse(parameters.levelsSpan);
+    n_tests = +parameters.tests;
+    play = document.getElementById("play");
+
+    // set up all the event handlers
+    init_splash();
+    init_plays();
+    init_interim();
+}
