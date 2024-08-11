@@ -1,0 +1,214 @@
+{
+    "data": {
+        "patches/cri/tcs01": {
+            "name": "7.5 RR 6/4,light greyish red",
+            "oklch": [
+                0.674,
+                0.062,
+                29.868
+            ],
+            "cam16ucs": [
+                64.785,
+                14.823,
+                7.235
+            ],
+            "srgb": "BA8980"
+        },
+        "patches/cri/tcs02": {
+            "name": "5 YY 6/4,Dark greyish yellow",
+            "oklch": [
+                0.661,
+                0.071,
+                89.012
+            ],
+            "cam16ucs": [
+                62.995,
+                2.454,
+                17.413
+            ],
+            "srgb": "A4915F"
+        },
+        "patches/cri/tcs03": {
+            "name": "5 GY 6/8,Strong yellow green",
+            "oklch": [
+                0.666,
+                0.12,
+                119.825
+            ],
+            "cam16ucs": [
+                63.256,
+                -10.548,
+                24.931
+            ],
+            "srgb": "8B9E43"
+        },
+        "patches/cri/tcs04": {
+            "name": "2.5 GG 6/6,Moderate yellowish green",
+            "oklch": [
+                0.654,
+                0.101,
+                154.529
+            ],
+            "cam16ucs": [
+                62.989,
+                -22.878,
+                11.988
+            ],
+            "srgb": "5AA374"
+        },
+        "patches/cri/tcs05": {
+            "name": "10 BG 6/4,Light bluish green",
+            "oklch": [
+                0.669,
+                0.061,
+                202.696
+            ],
+            "cam16ucs": [
+                65.307,
+                -19.068,
+                -6.629
+            ],
+            "srgb": "67A0A5"
+        },
+        "patches/cri/tcs06": {
+            "name": "5 PB 6/8,Light blue",
+            "oklch": [
+                0.667,
+                0.082,
+                254.818
+            ],
+            "cam16ucs": [
+                65.624,
+                -10.125,
+                -21.845
+            ],
+            "srgb": "7297C6"
+        },
+        "patches/cri/tcs07": {
+            "name": "2.5 PP 6/8,Light violet",
+            "oklch": [
+                0.673,
+                0.083,
+                305.771
+            ],
+            "cam16ucs": [
+                65.62,
+                11.081,
+                -18.821
+            ],
+            "srgb": "A289BF"
+        },
+        "patches/cri/tcs08": {
+            "name": "10 PP 6/8,Light reddish purple",
+            "oklch": [
+                0.69,
+                0.087,
+                335.292
+            ],
+            "cam16ucs": [
+                67.178,
+                19.09,
+                -9.559
+            ],
+            "srgb": "BD87B0"
+        },
+        "patches/cri/tcs09": {
+            "name": "4.5 RR 4/13,Strong red",
+            "oklch": [
+                0.506,
+                0.185,
+                20.498
+            ],
+            "cam16ucs": [
+                43.815,
+                39.433,
+                12.67
+            ],
+            "srgb": "B71E34"
+        },
+        "patches/cri/tcs10": {
+            "name": "5 YY 8/10,Strong yellow",
+            "oklch": [
+                0.838,
+                0.157,
+                95.903
+            ],
+            "cam16ucs": [
+                81.954,
+                0.511,
+                33.475
+            ],
+            "srgb": "E9C836"
+        },
+        "patches/cri/tcs11": {
+            "name": "4.5 GG 5/8,Strong green",
+            "oklch": [
+                0.574,
+                0.121,
+                163.34
+            ],
+            "cam16ucs": [
+                53.787,
+                -28.201,
+                9.502
+            ],
+            "srgb": "0C8E64"
+        },
+        "patches/cri/tcs12": {
+            "name": "3 PB 3/11,Strong blue",
+            "oklch": [
+                0.399,
+                0.156,
+                239.709
+            ],
+            "cam16ucs": [
+                35.251,
+                -19.727,
+                -26.667
+            ],
+            "srgb": "005A96"
+        },
+        "patches/cri/tcs13": {
+            "name": "5 YR 8/4,Light yellowish pink",
+            "oklch": [
+                0.834,
+                0.065,
+                56.311
+            ],
+            "cam16ucs": [
+                82.532,
+                10.078,
+                12.394
+            ],
+            "srgb": "EABEA0"
+        },
+        "patches/cri/tcs14": {
+            "name": "5 GY 4/4,Moderate olive green",
+            "oklch": [
+                0.484,
+                0.071,
+                123.132
+            ],
+            "cam16ucs": [
+                42.041,
+                -8.004,
+                16.226
+            ],
+            "srgb": "576537"
+        },
+        "patches/cri/tcs15": {
+            "name": ",Japanese skin",
+            "oklch": [
+                0.694,
+                0.06,
+                43.59
+            ],
+            "cam16ucs": [
+                67.096,
+                10.707,
+                10.463
+            ],
+            "srgb": "BD917F"
+        }
+    }
+}
