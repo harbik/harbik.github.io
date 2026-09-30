@@ -144,11 +144,19 @@ a:hover .logo {
 }
 
 .tagline {
+    max-width: calc(100vw - 2rem);
     margin-top: 0.6rem;
     color: var(--tinted-text-color);
     font-size: 0.8rem;
     letter-spacing: 0.3em;
+    text-align: center;
     text-transform: uppercase;
+
+    // Keep the tagline on one line on phones
+    @media (max-width: 30rem) {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+    }
 }
 
 main {
