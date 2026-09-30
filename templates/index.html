@@ -1,0 +1,45 @@
+{% import "teramacros/hb.html" as hb %}
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="intro">
+    {{ section.content | safe }}
+</div>
+
+{% for group in section.extra.groups %}
+<h2 class="front">{{ group.title }}</h2>
+{% if group.books %}
+<section class="books">
+    {% for book in group.books %}
+    {% if book.page %}
+        {% set p = get_page(path=book.page) %}
+        {{ hb::book_teaser(url=p.path, cover=p.extra.cover, alt=p.extra.cover_alt, title=p.title, subtitle=p.extra.subtitle | default(value="")) }}
+    {% else %}
+        {{ hb::book_teaser(url=book.url, cover=book.cover, alt=book.cover_alt, title=book.title, subtitle=book.subtitle | default(value="")) }}
+    {% endif %}
+    {% endfor %}
+</section>
+{% else %}
+<section class="links">
+    {% for link in group.links %}
+    <a class="tile" href="{{ link.url | safe }}">
+        <span class="tile-title">{{ link.title }}</span>
+        {% if link.subtitle %}
+        <span class="tile-subtitle">{{ link.subtitle }}</span>
+        {% endif %}
+    </a>
+    {% endfor %}
+</section>
+{% endif %}
+{% endfor %}
+
+<h2 class="front">Contact</h2>
+<section class="links">
+    <a class="tile" href="mailto:{{ config.extra.email | safe }}">
+        {{ hb::mail_icon() }}
+        <span class="tile-title">{{ config.extra.email }}</span>
+    </a>
+</section>
+
+{% endblock content %}

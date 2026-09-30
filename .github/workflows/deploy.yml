@@ -1,0 +1,49 @@
+# Builds the site with Zola and publishes it to GitHub Pages (www.harbik.com).
+# Requires Settings → Pages → Build and deployment → Source: "GitHub Actions".
+name: Deploy site
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  ZOLA_VERSION: "0.21.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install Zola
+        run: |
+          curl -sSfL "https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz -C /usr/local/bin
+          zola --version
+
+      - name: Build
+        run: zola build
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

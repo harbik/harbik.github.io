@@ -1,0 +1,31 @@
+{% macro logo() %}
+    <span class="logo" role="img" aria-label="Harbers Bik">
+        <span class="logo-name">Harbers</span>
+        <span class="logo-pivot" aria-hidden="true">
+            <span class="logo-joint"></span>
+        </span>
+        <span class="logo-name">Bik</span>
+    </span>
+{% endmacro logo %}
+
+{% macro mail_icon() %}
+    <svg class="mail-button" viewBox="12152.1 1573.92 100 100" fill-rule="evenodd" aria-hidden="true">
+        <path d="M12202.1,1573.92C12229.7,1573.92 12252.1,1596.33 12252.1,1623.92C12252.1,1651.52 12229.7,1673.92 12202.1,1673.92C12174.5,1673.92 12152.1,1651.52 12152.1,1623.92C12152.1,1596.33 12174.5,1573.92 12202.1,1573.92ZM12228.1,1641.64C12228.1,1641.92 12228,1642.18 12227.8,1642.44C12227.6,1642.56 12227.5,1642.66 12227.4,1642.74C12227.2,1642.81 12227.1,1642.85 12226.9,1642.85L12177.4,1642.85C12177.1,1642.85 12176.7,1642.7 12176.5,1642.41C12176.2,1642.12 12176,1641.78 12176,1641.39L12176,1606.26C12176,1605.96 12176.2,1605.68 12176.4,1605.41C12176.7,1605.13 12177,1605 12177.4,1605L12226.8,1605C12227,1605 12227.2,1605.05 12227.4,1605.14C12227.5,1605.23 12227.6,1605.35 12227.8,1605.49C12228,1605.79 12228.1,1606.08 12228.1,1606.36L12228.1,1641.64ZM12209.7,1625.56L12206.7,1628.52C12206,1629.15 12205.4,1629.64 12204.6,1629.99C12203.9,1630.34 12203.1,1630.52 12202.2,1630.52C12201.3,1630.52 12200.5,1630.31 12199.7,1629.9C12199,1629.49 12198.2,1628.98 12197.6,1628.36L12194.8,1625.84L12182.3,1638.56L12221.9,1638.56L12209.7,1625.56ZM12181,1611.94L12181,1636.33L12193.1,1624.1L12181,1611.94ZM12211.5,1623.75L12223.1,1636.15L12223.1,1611.96L12211.5,1623.75ZM12221.1,1609.57L12183,1609.57L12200.1,1626.5C12200.3,1626.72 12200.6,1626.91 12201,1627.09C12201.4,1627.27 12201.7,1627.35 12202.1,1627.35C12202.5,1627.35 12203,1627.28 12203.4,1627.12C12203.8,1626.97 12204.2,1626.69 12204.6,1626.29L12221.1,1609.57Z"/>
+    </svg>
+{% endmacro mail_icon %}
+
+{% macro book_teaser(url, cover, alt, title, subtitle) %}
+    <a class="book-teaser" href="{{ url | safe }}">
+        <img src="{{ cover | safe }}" alt="{{ alt }}">
+        <span class="book-teaser-title">{{ title }}</span>
+        {% if subtitle %}
+        <span class="book-teaser-subtitle">{{ subtitle }}</span>
+        {% endif %}
+    </a>
+{% endmacro book_teaser %}
+
+{% macro copyright() %}
+    {# The year is set at build time; the script keeps it current between builds. #}
+    &copy;<span id="year">{{ now() | date(format="%Y") }}</span> Harbers Bik LLC. All rights reserved.
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+{% endmacro copyright %}

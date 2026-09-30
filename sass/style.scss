@@ -1,0 +1,475 @@
+// Design follows gerardharbers.com (sass/base.scss and sass/index.scss).
+
+@font-face {
+    font-display: swap;
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/cabin-v27-latin-regular.woff2') format('woff2');
+}
+@font-face {
+    font-display: swap;
+    font-family: 'Cabin';
+    font-style: italic;
+    font-weight: 400;
+    src: url('/fonts/cabin-v27-latin-italic.woff2') format('woff2');
+}
+@font-face {
+    font-display: swap;
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/cabin-v27-latin-500.woff2') format('woff2');
+}
+@font-face {
+    font-display: swap;
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/cabin-v27-latin-700.woff2') format('woff2');
+}
+
+$hue: 210;
+$sat: 30%;
+
+:root {
+    --background-color: hsl(#{$hue} 0% 98%);
+    --text-color: hsl(#{$hue} 0% 25%);
+    --link-color: hsl(#{$hue} 50% 50%);
+    --tinted-text-color: hsl(#{$hue} #{$sat} 50%);
+    --hover-color: hsl(#{$hue} #{$sat} 50%);
+    --shadow-color: lightgray;
+    --brand-accent-color: hsl(204 44% 38%);
+    --page-width: min(60rem, calc(100vw - 4rem));
+    --text-width: min(40rem, calc(100vw - 4rem));
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: hsl(#{$hue} 0% 15%);
+        --text-color: hsl(#{$hue} 0% 80%);
+        --link-color: hsl(#{$hue} 50% 70%);
+        --tinted-text-color: hsl(#{$hue} #{$sat} 50%);
+        --hover-color: hsl(#{$hue} #{$sat} 50%);
+        --shadow-color: gray;
+        --brand-accent-color: hsl(204 40% 66%);
+    }
+}
+
+html {
+    font-size: 18px;
+}
+
+body {
+    background: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Cabin', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5rem 0 2rem;
+}
+
+a, a:visited {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--hover-color);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+// Wordmark: NAME ◆ NAME, same construction as the gerardharbers.com logo
+.logo {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-color);
+    font-size: clamp(1.15rem, 3.2vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    .logo-name {
+        letter-spacing: 0.06em;
+    }
+
+    .logo-pivot {
+        position: relative;
+        width: 0.51em;
+        height: 1.75em;
+        flex: 0 0 0.51em;
+        margin-inline: 0.5em;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            width: 1px;
+            height: 29%;
+            background: currentColor;
+            transform: translateX(-50%);
+        }
+
+        &::before {
+            top: 0;
+        }
+
+        &::after {
+            bottom: 0;
+        }
+    }
+
+    .logo-joint {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0.56em;
+        height: 0.56em;
+        background: var(--brand-accent-color);
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+}
+
+a:hover .logo {
+    color: var(--hover-color);
+}
+
+.tagline {
+    margin-top: 0.6rem;
+    color: var(--tinted-text-color);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.intro {
+    width: var(--text-width);
+    margin-top: 2.5rem;
+    font-style: italic;
+    text-align: justify;
+
+    p {
+        margin: 0;
+    }
+}
+
+// Section headings: uppercase, accent color, with a rule on either side
+.front {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 3vw, 1.5rem);
+    width: var(--page-width);
+    margin: 3.5rem 0 0;
+    color: var(--brand-accent-color);
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+
+    &::before,
+    &::after {
+        content: "";
+        flex: 1;
+        min-width: 1rem;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.45;
+    }
+}
+
+// Link tiles, styled after the book teasers on gerardharbers.com
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem 4rem;
+    width: var(--text-width);
+    margin-top: 2rem;
+}
+
+.tile,
+.tile:visited {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(18rem, 100%);
+    color: var(--text-color);
+    text-align: center;
+}
+
+.tile:hover {
+    color: var(--hover-color);
+}
+
+.tile-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.tile-subtitle {
+    margin-top: 0.25rem;
+    color: var(--tinted-text-color);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.mail-button {
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+    fill: var(--text-color);
+}
+
+.tile:hover .mail-button {
+    fill: var(--hover-color);
+}
+
+// Book covers on the homepage, as on gerardharbers.com. Covers share a height,
+// so titles line up even when the books have different trim sizes.
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.5rem 3rem;
+    width: var(--page-width);
+    margin-top: 2rem;
+}
+
+.book-teaser,
+.book-teaser:visited {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(17rem, 100%);
+    color: var(--text-color);
+    text-align: center;
+
+    img {
+        display: block;
+        height: 19rem;
+        width: auto;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        box-shadow: 0 0 20px var(--shadow-color);
+    }
+}
+
+.book-teaser:hover {
+    color: var(--hover-color);
+}
+
+.book-teaser-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.book-teaser-subtitle {
+    margin-top: 0.25rem;
+    color: var(--tinted-text-color);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+// Book page, after the Seventeen Eyes page on gerardharbers.com
+.book-hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3rem;
+    width: min(58rem, calc(100vw - 4rem));
+    margin-top: 3rem;
+}
+
+.book-cover img {
+    display: block;
+    width: min(20rem, calc(70vw - 2rem));
+    height: auto;
+    box-shadow: 0 0 20px var(--shadow-color);
+}
+
+.book-intro {
+    flex: 1 1 17rem;
+    max-width: min(26rem, calc(100vw - 4rem));
+
+    h1 {
+        margin: 0.4rem 0 0;
+        font-size: 1.8rem;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.book-tagline {
+    color: var(--tinted-text-color);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.book-subtitle {
+    margin-top: 0.4rem !important;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.book-author {
+    margin-top: 0.6rem !important;
+}
+
+.book-editions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.book-edition {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.edition-format {
+    color: var(--tinted-text-color);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.edition-price {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.edition-isbn {
+    font-size: 0.8rem;
+}
+
+.buy-button,
+.buy-button:visited {
+    display: inline-block;
+    margin-top: 0.9rem;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    background: var(--link-color);
+    color: var(--background-color);
+    font: inherit;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background: var(--hover-color);
+    color: var(--background-color);
+}
+
+.buy-button:disabled {
+    background: var(--text-color);
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.book-buy-note {
+    margin-top: 0.8rem !important;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+dl.book-details {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.2rem 1rem;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+
+    dt {
+        color: var(--tinted-text-color);
+    }
+
+    dd {
+        margin: 0;
+    }
+}
+
+.book-quote {
+    width: var(--text-width);
+    margin: 3.5rem 0 0;
+    text-align: center;
+    font-size: 1.3rem;
+    font-style: italic;
+
+    p {
+        margin: 0;
+    }
+
+    .book-quote-author {
+        margin-top: 0.4rem;
+        color: var(--tinted-text-color);
+        font-size: 0.9rem;
+        font-style: normal;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+}
+
+// Body text of regular pages
+article {
+    width: var(--text-width);
+    margin-top: 2rem;
+    line-height: 1.5;
+
+    h2 {
+        margin: 2rem 0 0.5rem;
+        font-size: 1.15rem;
+        font-weight: 500;
+    }
+
+    p {
+        margin: 0 0 1rem;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    blockquote {
+        font-style: italic;
+    }
+}
+
+footer {
+    width: var(--page-width);
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}

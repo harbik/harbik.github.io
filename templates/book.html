@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}: {{ page.extra.subtitle }}{% endblock title %}
+
+{% block head %}
+    {{ super() }}
+    <meta property="og:type" content="book">
+    <meta property="og:title" content="{{ page.title }}: {{ page.extra.subtitle }}">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:url" content="{{ page.permalink | safe }}">
+    <meta property="og:image" content="{{ get_url(path=page.extra.cover) | safe }}">
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock head %}
+
+{% block content %}
+<section class="book-hero">
+
+    <div class="book-cover">
+        <img src="{{ page.extra.cover | safe }}" alt="{{ page.extra.cover_alt }}">
+    </div>
+
+    <div class="book-intro">
+        {% if page.extra.tagline %}
+        <p class="book-tagline">{{ page.extra.tagline }}</p>
+        {% endif %}
+        <h1>{{ page.title }}</h1>
+        <p class="book-subtitle">{{ page.extra.subtitle }}</p>
+        <p class="book-author">{{ page.extra.author }}</p>
+
+        <div class="book-editions">
+        {% for edition in page.extra.editions %}
+            <div class="book-edition">
+                <span class="edition-format">{{ edition.format }}</span>
+                <span class="edition-price">{{ edition.price }}</span>
+                <span class="edition-isbn">ISBN {{ edition.isbn }}</span>
+                {% if edition.buy_url %}
+                <a class="buy-button" href="{{ edition.buy_url | safe }}">Buy {{ edition.format | lower }}</a>
+                {% else %}
+                <button class="buy-button" type="button" disabled>Buy {{ edition.format | lower }}</button>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+        {% if page.extra.buy_note %}
+        <p class="book-buy-note">{{ page.extra.buy_note }}</p>
+        {% endif %}
+
+        <dl class="book-details">
+        {% for item in page.extra.details %}
+            <dt>{{ item.label }}</dt><dd>{{ item.value }}</dd>
+        {% endfor %}
+        </dl>
+    </div>
+
+</section>
+
+{% if page.extra.quote %}
+<blockquote class="book-quote">
+    <p>“{{ page.extra.quote }}”</p>
+    <p class="book-quote-author">{{ page.extra.author }}</p>
+</blockquote>
+{% endif %}
+
+<article class="book-copy">
+    {{ page.content | safe }}
+</article>
+{% endblock content %}

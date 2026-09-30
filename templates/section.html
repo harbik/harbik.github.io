@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="front">{{ section.title }}</h1>
+    {% if section.content %}
+    <article>
+    {{ section.content | safe }}
+    </article>
+    {% endif %}
+    <section class="links">
+    {% for page in section.pages %}
+        <a class="tile" href="{{ page.path | safe }}">
+            <span class="tile-title">{{ page.title }}</span>
+            {% if page.description %}
+            <span class="tile-subtitle">{{ page.description }}</span>
+            {% endif %}
+        </a>
+    {% endfor %}
+    </section>
+{% endblock content %}

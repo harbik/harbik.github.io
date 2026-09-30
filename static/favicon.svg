@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    :root { color: #20262a; }
+    .pivot { fill: #376b8d; }
+
+    @media (prefers-color-scheme: dark) {
+      :root { color: #eef0f1; }
+      .pivot { fill: #79aac9; }
+    }
+  </style>
+  <path d="M6 14v36M24 14v36M6 32h18" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"/>
+  <rect class="pivot" x="29" y="29" width="6" height="6" transform="rotate(45 32 32)"/>
+  <path d="M40 14V50H50a9 9 0 0 0 0-18H40M40 32h9a9 9 0 0 0 0-18H40" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>
