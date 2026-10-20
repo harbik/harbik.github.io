@@ -412,6 +412,11 @@ main {
     font-style: italic;
 }
 
+.book-bulk-note {
+    margin-top: 0.4rem !important;
+    font-size: 0.9rem;
+}
+
 dl.book-details {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -428,9 +433,32 @@ dl.book-details {
     }
 }
 
+.book-author-photo {
+    width: min(14rem, calc(100vw - 4rem));
+    margin: 4rem 0 0;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 0 20px var(--shadow-color);
+    }
+
+    figcaption {
+        margin-top: 0.5rem;
+        color: var(--tinted-text-color);
+        font-size: 0.8rem;
+        text-align: right;
+    }
+}
+
 .book-quote {
     width: var(--text-width);
     margin: 3.5rem 0 0;
+
+    .book-author-photo + & {
+        margin-top: 2rem;
+    }
     text-align: center;
     font-size: 1.3rem;
     font-style: italic;

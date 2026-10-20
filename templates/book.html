@@ -44,6 +44,9 @@
         {% if page.extra.buy_note %}
         <p class="book-buy-note">{{ page.extra.buy_note }}</p>
         {% endif %}
+        {% if page.extra.bulk_note %}
+        <p class="book-bulk-note">{{ page.extra.bulk_note | markdown(inline=true) | safe }}</p>
+        {% endif %}
 
         <dl class="book-details">
         {% for item in page.extra.details %}
@@ -53,6 +56,15 @@
     </div>
 
 </section>
+
+{% if page.extra.author_photo %}
+<figure class="book-author-photo">
+    <img src="{{ page.extra.author_photo | safe }}" alt="{{ page.extra.author_photo_alt }}">
+    {% if page.extra.author_photo_credit %}
+    <figcaption>{{ page.extra.author_photo_credit }}</figcaption>
+    {% endif %}
+</figure>
+{% endif %}
 
 {% if page.extra.quote %}
 <blockquote class="book-quote">

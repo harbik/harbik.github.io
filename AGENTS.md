@@ -39,6 +39,7 @@ sass/style.scss       # All styles, compiled to /style.css
 static/               # Copied verbatim to the site root
   CNAME               # Custom domain for GitHub Pages
   img/books/          # Book covers, 800 px wide JPEG
+  img/authors/        # Author photos, 600 px wide JPEG
   data/, img/         # Published assets — keep their paths stable, other sites link to them
 .github/workflows/deploy.yml  # Build and deploy workflow
 public/               # Build output — git-ignored, never edit directly
@@ -62,6 +63,8 @@ book gives its own `title`, `subtitle`, `cover`, `cover_alt` and `url`.
 A book page uses `template = "book.html"`. Each binding is an `[[extra.editions]]`
 entry with `format`, `price` and `isbn`. Its buy button is greyed out until the
 edition gets a `buy_url`; remove `buy_note` ("To be released soon.") at the same time.
+An optional author photo (`author_photo`, `author_photo_alt`, `author_photo_credit`)
+is shown above the quote. `bulk_note` (Markdown) is shown below the buy buttons.
 
 **Do not rename `content/herman.md`.** Its URL, `harbik.com/herman`, is printed on
 the book jacket. The `aliases` entry keeps the earlier URL, `harbik.com/herman-schaap`,
