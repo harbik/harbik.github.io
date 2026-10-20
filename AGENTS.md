@@ -26,7 +26,7 @@ light and dark mode, and a "NAME ◆ NAME" wordmark.
 ```text
 content/              # Markdown source
   _index.md           # Homepage: intro text, link groups and book groups (front matter)
-  herman-schaap.md    # Book page for "When the Planes Brought Food"
+  herman.md           # Book page for "When the Planes Brought Food"
 templates/            # Tera HTML templates
   base.html           # Shared head, logo header and footer
   index.html          # Homepage
@@ -56,15 +56,16 @@ The contact email is set in `config.toml` under `[extra]`.
 ## Harbik Press Books
 
 The "Harbik Press" group in `content/_index.md` lists books as covers. A book on
-this site is referenced by its page (`{ page = "herman-schaap.md" }`); an external
+this site is referenced by its page (`{ page = "herman.md" }`); an external
 book gives its own `title`, `subtitle`, `cover`, `cover_alt` and `url`.
 
 A book page uses `template = "book.html"`. Each binding is an `[[extra.editions]]`
 entry with `format`, `price` and `isbn`. Its buy button is greyed out until the
 edition gets a `buy_url`; remove `buy_note` ("To be released soon.") at the same time.
 
-**Do not rename `content/herman-schaap.md`.** Its URL, `harbik.com/herman-schaap`,
-is printed on the book jacket.
+**Do not rename `content/herman.md`.** Its URL, `harbik.com/herman`, is printed on
+the book jacket. The `aliases` entry keeps the earlier URL, `harbik.com/herman-schaap`,
+working as a redirect.
 
 ## Adding Pages
 

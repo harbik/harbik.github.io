@@ -17,7 +17,7 @@ links = [
 title = "Harbik Press"
 books = [
     { title = "Seventeen Eyes", subtitle = "The Impossible Quest to Define Color", cover = "/img/books/seventeen-eyes.jpg", cover_alt = "Front cover of Seventeen Eyes by Gerard Harbers: a banana on a cream ground, with a peel reflectance curve behind it.", url = "https://www.gerardharbers.com/seventeen-eyes/" },
-    { page = "herman-schaap.md" },
+    { page = "herman.md" },
 ]
 
 [[extra.groups]]

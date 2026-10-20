@@ -2,6 +2,8 @@
 title = "When the Planes Brought Food"
 description = "Herman Schaap's true story of growing up in Haarlem under German occupation, written for older students and adults."
 template = "book.html"
+# The old URL, harbik.com/herman-schaap, redirects here.
+aliases = ["/herman-schaap/"]
 
 [extra]
 tagline = "A True Story of Hunger, Hope, and Help"
