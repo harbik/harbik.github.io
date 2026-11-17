@@ -63,6 +63,12 @@ book gives its own `title`, `subtitle`, `cover`, `cover_alt` and `url`.
 A book page uses `template = "book.html"`. Each binding is an `[[extra.editions]]`
 entry with `format`, `price` and `isbn`. Its buy button is greyed out until the
 edition gets a `buy_url`; remove `buy_note` ("To be released soon.") at the same time.
+A `buy_url` is an amazon.com link (`https://www.amazon.com/dp/<code>`). A script in
+`book.html` swaps in the visitor's own Amazon store (amazon.nl, amazon.de, …), chosen
+by the browser's time zone, and keeps amazon.com for everyone else. A store is listed
+in that script only after checking the book is on sale there. Before adding a new
+edition's `buy_url`, check that it is listed in all those stores too: new listings
+can reach the other stores a few days after amazon.com.
 An optional author photo (`author_photo`, `author_photo_alt`, `author_photo_credit`)
 is shown above the quote. `bulk_note` (Markdown) is shown below the buy buttons.
 

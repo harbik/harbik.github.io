@@ -76,4 +76,44 @@
 <article class="book-copy">
     {{ page.content | safe }}
 </article>
+
+{#- Sends visitors to their own Amazon store. A buy_url is an amazon.com link,
+    and the same product code works in the stores below. The browser's time zone
+    tells where the visitor's computer is; everyone else keeps amazon.com.
+    List a store only after checking the book is listed there. -#}
+<script>
+(function () {
+    var zone;
+    try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return; }
+    var stores = {
+        "Europe/Amsterdam": "www.amazon.nl",
+        "Europe/Brussels": "www.amazon.com.be",
+        "Europe/Berlin": "www.amazon.de",
+        "Europe/Vienna": "www.amazon.de",
+        "Europe/Paris": "www.amazon.fr",
+        "Europe/London": "www.amazon.co.uk",
+        "Europe/Dublin": "www.amazon.ie",
+        "Europe/Madrid": "www.amazon.es",
+        "Atlantic/Canary": "www.amazon.es",
+        "Europe/Rome": "www.amazon.it",
+        "Europe/Stockholm": "www.amazon.se",
+        "Europe/Warsaw": "www.amazon.pl",
+        "America/Toronto": "www.amazon.ca",
+        "America/Montreal": "www.amazon.ca",
+        "America/Vancouver": "www.amazon.ca",
+        "America/Edmonton": "www.amazon.ca",
+        "America/Winnipeg": "www.amazon.ca",
+        "America/Regina": "www.amazon.ca",
+        "America/Halifax": "www.amazon.ca",
+        "America/Moncton": "www.amazon.ca",
+        "America/St_Johns": "www.amazon.ca"
+    };
+    var host = stores[zone] || (zone.indexOf("Australia/") === 0 ? "www.amazon.com.au" : null);
+    if (!host) return;
+    var links = document.querySelectorAll('a.buy-button[href^="https://www.amazon.com/"]');
+    for (var i = 0; i < links.length; i++) {
+        links[i].href = links[i].href.replace("https://www.amazon.com/", "https://" + host + "/");
+    }
+})();
+</script>
 {% endblock content %}
