@@ -14,9 +14,7 @@ cover_alt = "Front cover of When the Planes Brought Food: a watercolor of a B-17
 author_photo = "/img/authors/herman-schaap.jpg"
 author_photo_alt = "Portrait of Herman Schaap, smiling, with white hair and a short white beard, in a blue checked shirt against a grey background."
 quote = "Every time I see food wasted, my mind goes back to 1944."
-# Shown below the buy buttons. Remove it once all editions are on sale.
-buy_note = "Paperback to be released soon."
-# Markdown, shown below the buy note.
+# Markdown, shown below the buy buttons.
 bulk_note = "For larger quantities, ask for a quote at [quotes@harbik.com](mailto:quotes@harbik.com)."
 
 # One entry per binding. Add `buy_url` to an edition to turn its greyed-out
@@ -31,6 +29,7 @@ buy_url = "https://www.amazon.com/dp/B0HQW9BR4S"
 format = "Paperback"
 price = "US $9.50"
 isbn = "979-8-952464-04-9"
+buy_url = "https://www.amazon.com/dp/B0HRJVS59R"
 
 [[extra.details]]
 label = "Publisher"
